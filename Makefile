@@ -12,19 +12,19 @@ OBJDIR = obj
 
 #$(BINDIR)/frames: $(OBJDIR)/driver.o $(OBJDIR)/FrameSequence.o
 	
-$(OBJDIR)/driver.o: $(SRCDIR)/driver.cpp
+
+frames: driver.o
+	$(CC) driver.o  -o frames $(LIBS)
+
+driver.o: $(SRCDIR)/driver.cpp
 	$(CC) -c $(SRCDIR)/driver.cpp
-
-$(BINDIR)/frames: $(OBJDIR)/driver.o
-	$(CC) $(OBJDIR)/driver.o  -o $(BINDIR)/frames $(LIBS)
-
-
 
 #$(OBJDIR)/FrameSequence.o: $(SRCDIR)/FrameSequence.cpp
 #	$(CC) -c $(SRCDIR)/FrameSequence.cpp
 
 clean:
-	rm $(OBJDIR)/*.o $(BINDIR)/frames
+	@rm -f *.o 
+	@rm frames
 
 install: 
 	@mv $(BINDIR)/frames ~/bin
