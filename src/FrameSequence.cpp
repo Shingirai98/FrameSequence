@@ -42,7 +42,11 @@ void FrameSequence::setFrames(char * bufferedImage){
     if ((f_x2-f_x1)<(f_y2-f_y1)){
         max = f_y2-f_y1;
     }
-    for (int k = 0; k < max ; k++ ){
+    
+    int fy =f_y1;
+    int fx =f_x1;
+    
+    while(fy<f_y2 || fx<f_x2){
         for (int i = 0; i < f_height; i++  ){
             for(int j = 0; j < f_width; j++){
                 //add pixel to 2D array
@@ -51,24 +55,45 @@ void FrameSequence::setFrames(char * bufferedImage){
                
             }
         }
-        
+        fy= fy + 1;
+        fx= fx + 1;
         //push back 2D array to vector
         imageSequence.push_back(imSeq);
         
     }
-    //for (int k= 0; k<imageSequence.size(), k++);
+    for (int k= 0; k<imageSequence.size(); k++){
     
-    //std:: string fN = k;
-    std::ofstream outputFile("0000.pgm", std::ios::binary);
-    outputFile << "P5\n" << f_width << " " << f_height <<  "\n"<< 255 << std::endl;
-    //outputFile << (frame.imageSequence[1]);
-    //char * bo = new char [f_width*f_height];
-    
-    for (int d=0; d<f_height; d++){
-        for (int e=0; e<f_width; e++){
-            //bo[d+e] = frame.imageSequence[0][d][e];
-            outputFile << (unsigned char)imageSequence[0][d][e] ;
-            //std::cout <<(unsigned char)imageSequence[0][d][e];
+        //std:: string fN = k;
+        
+        std::string value = std::to_string(k);
+        if (k <10){
+            value = "000" + value;
+        }
+        else if (k<100){
+            value = "00" +value;
+        }
+        else if (k<1000){
+            value = "0" + value;
+        }
+
+        std::string extension = ".pgm";
+        std::string fileN = value+extension;
+        std::ofstream outputFile(fileN, std::ios::binary);
+
+        outputFile << "P5\n" << f_width << " " << f_height <<  "\n"<< 255 << std::endl;
+        //outputFile << (frame.imageSequence[1]);
+        //char * bo = new char [f_width*f_height];
+        //for (int c=0; c<imageSequence.size(); c++){
+        //outputFile.write((const char*)imageSequence[0], (f_height*f_width));
+       // }
+        //for (int c=0; c<imageSequence.size(); c++){
+        for (int d=0; d<f_height; d++){
+            for (int e=0; e<f_width; e++){
+                    //bo[d+e] = frame.imageSequence[0][d][e];
+                    //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
+                outputFile << (unsigned char)imageSequence[k][d][e] ;
+                    //std::cout <<(unsigned char)imageSequence[0][d][e];
+            }
         }
     }
 //    for (int h=0; h< f_width ; h++){
