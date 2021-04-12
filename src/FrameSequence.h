@@ -1,6 +1,8 @@
+#include <vector>
 #ifndef _FRAMESEQUENCE
 #define _FRAMESEQUENCE
 //namespace MBRSHI002{
+
 class FrameSequence{
 private:
     int f_height;
@@ -9,21 +11,17 @@ private:
     int f_y1 ;
     int f_x2 ;
     int f_y2 ;
-    char * f_bufferedImage;
-    std::vector<unsigned char **> imageSequence;
+    //char * f_bufferedImage;
+    //std::vector<unsigned char **> imageSequence;
     
 public :
     FrameSequence(void);
     ~FrameSequence();
-    setFrameSize(int height, int width);
-    setFrames(char * bufferedImage);
-    setStartnEnd(int x1, int y1, int x2, int y2);
+    void setFrameSize(int height, int width);
+    void setFrames(char * bufferedImage);
+    void setStartnEnd(int x1, int y1, int x2, int y2);
+    std::vector<unsigned char **> imageSequence;
 };
 
 #endif
     
-//    //		std::vector<unsigned char **> imageSequence;
-//            FrameSequence(void);
-//    };
-//}
-//#endif
