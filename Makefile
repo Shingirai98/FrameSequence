@@ -13,8 +13,8 @@ OBJDIR = obj
 #$(BINDIR)/frames: $(OBJDIR)/driver.o $(OBJDIR)/FrameSequence.o
 	
 
-frames: driver.o FrameSequence.o
-	$(CC) driver.o FrameSequence.o -o frames $(LIBS)
+extractor: driver.o FrameSequence.o
+	$(CC) driver.o FrameSequence.o -o extractor $(LIBS)
 
 driver.o: $(SRCDIR)/driver.cpp 
 	$(CC) -c $(SRCDIR)/driver.cpp
@@ -25,7 +25,7 @@ FrameSequence.o: $(SRCDIR)/FrameSequence.cpp
 clean:
 	@rm -f *.o 
 	@rm frames
-	@rm -f *.pgm
+	@rm -f ./img/*.pgm
 
 install: 
-	@mv $(BINDIR)/frames ~/bin
+	@mv $(BINDIR)/extractor ~/bin
