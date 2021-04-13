@@ -31,7 +31,22 @@ void FrameSequence::setStartnEnd(int x1, int y1, int x2,int y2){
     f_y1 = y1;
     f_y2 = y2;
 }
+void Gradient(int x_start, int x_end, int y_start, int y_end){
+    // loop over x and find corresponding y on line
 
+    float y = y_start;
+    float frame_coord=(x_start + y_start); // starting frame coord
+    //for (int x=x_start+1; x <= x_end; ++x)
+    // { y += g;  =(x, std::round(y)); }
+
+    //  OR loop over y and find corresponding x on line
+    // NOTE: g here should be computed as (x2-x1)/(y2-y1) (because of variable swap) or you can use 1/g (using g computed above)
+
+    int x = x_start;
+    frame_coord=(x_start+y_start); // starting frame coord
+    //for (int y = ystart+1; y <= yend; ++y)
+    //{ x += g; frame_coord=(std::round(x), y) ;}
+}
 void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::string name){
     
     unsigned char** imSeq = new unsigned char*[f_height];

@@ -23,6 +23,7 @@ public :
     void setFrames(char * bufferedImage, std::string operation, std::string name );
     void setStartnEnd(int x1, int y1, int x2, int y2);
     std::vector<unsigned char **> imageSequence;
+    void Gradient(int x_start, int x_end, int y_start, int y_end);
 };
 
 #endif
