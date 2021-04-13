@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
             na.push_back(argv[12+cont]);
             cont = cont+3;
         }
-        std::cout<<op[0]<<std::endl;
+       
         //call the extractor function
         extractor(fileName, x1, y1, x2, y2, width, height, op, na);
        
@@ -89,16 +89,19 @@ void extractor(std::string filename, int x1, int y1, int x2, int y2, int width, 
         rows = stoi(Y);
         
         // read the file and point to it using the buffer pointer
-        char * buffer = new char [rows*cols];
-    
-        imageFile.read(buffer, (rows*cols));
-        FrameSequence frame;
-        imageFile.close();
-        frame.setFrameSize(width, height);
-        frame.setStartnEnd(x1, y1, x2, y2);
-
-        frame.setFrames(buffer, operation[0], name[0]);
-       
+        
+        for(int v=0; v<operation.size(); v++){
+            char * buffer = new char [rows*cols];
+        
+            imageFile.read(buffer, (rows*cols));
+            FrameSequence frame;
+            imageFile.close();
+            frame.setFrameSize(width, height);
+            frame.setStartnEnd(x1, y1, x2, y2);
+            frame.setFrames(buffer, operation[v], name[v]);
+            delete[]buffer;
+           
+        }
         
         //outputFile.write(bo, (width*height));
         //std::cout<<(int)(*buffer)<<std::endl;

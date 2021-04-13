@@ -48,12 +48,13 @@ void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::
     int fx =f_x1;
     
     while(fy<f_y2 || fx<f_x2){
+        int start = f_x1+f_y1;
         for (int i = 0; i < f_height; i++  ){
             for(int j = 0; j < f_width; j++){
                 //add pixel to 2D array
                 
-                imSeq[i][j] =(unsigned char) bufferedImage[f_y1+i+f_x1+j];
-               
+                imSeq[i][j] =*(bufferedImage+(start));
+                start++;
             }
         }
         fy= fy + 1;
@@ -96,7 +97,7 @@ void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::
                 for (int e=0; e<f_width; e++){
                         //bo[d+e] = frame.imageSequence[0][d][e];
                         //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
-                        outputFile << (unsigned char) (255-((float)imageSequence[k][d][e]) );
+                        outputFile << (const char) (255-((float)imageSequence[k][d][e]) );
                         //std::cout <<(unsigned char)imageSequence[0][d][e];
                 }
             }
@@ -106,7 +107,7 @@ void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::
                 for (int e=0; e<f_width; e++){
                         //bo[d+e] = frame.imageSequence[0][d][e];
                         //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
-                        outputFile << (unsigned char) (255-((float)imageSequence[imageSequence.size()-k][d][e]) );
+                        outputFile << (const char) (255-((float)imageSequence[imageSequence.size()-k][d][e]) );
                 }
             }
         }
@@ -114,24 +115,24 @@ void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::
             for (int d=0; d<f_height; d++){
                 for (int e=0; e<f_width; e++){
                                 
-                        outputFile << (unsigned char) (((float)imageSequence[imageSequence.size()-k][d][e]) );
+                        outputFile << (const char) (((float)imageSequence[imageSequence.size()-k][d][e]) );
                 }
+            }
+        }
         else{
             for (int d=0; d<f_height; d++){
                 for (int e=0; e<f_width; e++){
                         //bo[d+e] = frame.imageSequence[0][d][e];
                         //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
                     //std::cout << operation << std::endl;
-                    outputFile << (float)imageSequence[k][d][e] ;
+                    outputFile << (const char)(float)imageSequence[k][d][e] ;
                         //std::cout <<(unsigned char)imageSequence[0][d][e];
                 }
             }
         }
         
     }
-    for (int h=0; h< f_width ; h++){
-        delete[]imSeq[h];
-   }
+    
    delete[]imSeq;
   
 }
