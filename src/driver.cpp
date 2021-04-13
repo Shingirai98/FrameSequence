@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
             na.push_back(argv[12+cont]);
             cont = cont+3;
         }
-        std::cout<<op[1]<<std::endl;
+        std::cout<<op[0]<<std::endl;
         //call the extractor function
         extractor(fileName, x1, y1, x2, y2, width, height, op, na);
        

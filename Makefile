@@ -24,7 +24,7 @@ FrameSequence.o: $(SRCDIR)/FrameSequence.cpp
 
 clean:
 	@rm -f *.o 
-	@rm frames
+	@rm extractor
 	@rm -f ./img/*.pgm
 
 install: 

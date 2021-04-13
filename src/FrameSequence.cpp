@@ -32,12 +32,13 @@ void FrameSequence::setStartnEnd(int x1, int y1, int x2,int y2){
     f_y2 = y2;
 }
 
-void FrameSequence::setFrames(char * bufferedImage){
+void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::string name){
     
     unsigned char** imSeq = new unsigned char*[f_height];
     for(int i=0; i < f_height; i++){
         imSeq[i] = new unsigned char[f_width];
     }
+    
     int max = f_x2-f_x1;
     if ((f_x2-f_x1)<(f_y2-f_y1)){
         max = f_y2-f_y1;
@@ -65,7 +66,9 @@ void FrameSequence::setFrames(char * bufferedImage){
     
         //std:: string fN = k;
         std::string path = "./img/";
+        //if (
         std::string value = std::to_string(k);
+        
         if (k <10){
             value = "000" + value;
         }
@@ -77,7 +80,7 @@ void FrameSequence::setFrames(char * bufferedImage){
         }
 
         std::string extension = ".pgm";
-        std::string fileN = path+value+extension;
+        std::string fileN = path+name+"-"+value+extension;
         std::ofstream outputFile(fileN, std::ios::binary);
 
         outputFile << "P5\n" << f_width << " " << f_height <<  "\n"<< 255 << std::endl;
@@ -87,14 +90,33 @@ void FrameSequence::setFrames(char * bufferedImage){
         //outputFile.write((const char*)imageSequence[0], (f_height*f_width));
        // }
         //for (int c=0; c<imageSequence.size(); c++){
-        for (int d=0; d<f_height; d++){
-            for (int e=0; e<f_width; e++){
-                    //bo[d+e] = frame.imageSequence[0][d][e];
-                    //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
-                outputFile << (unsigned char)imageSequence[k][d][e] ;
-                    //std::cout <<(unsigned char)imageSequence[0][d][e];
+        float m =0;
+        //std::cout << imageSequence.size() << std::endl;
+        if (operation == "invert" || operation == "revinvert"){
+            for (int d=0; d<f_height; d++){
+                for (int e=0; e<f_width; e++){
+                        //bo[d+e] = frame.imageSequence[0][d][e];
+                        //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
+                   // m = (float)imageSequence[k][d][e] ;
+                    //std::cout << "you here" << std::endl;
+                    if (operation == "revinvert")
+                    outputFile << (unsigned char) (255-((float)imageSequence[k][d][e]) );
+                        //std::cout <<(unsigned char)imageSequence[0][d][e];
+                }
             }
         }
+        else{
+            for (int d=0; d<f_height; d++){
+                for (int e=0; e<f_width; e++){
+                        //bo[d+e] = frame.imageSequence[0][d][e];
+                        //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
+                    //std::cout << operation << std::endl;
+                    outputFile << (float)imageSequence[k][d][e] ;
+                        //std::cout <<(unsigned char)imageSequence[0][d][e];
+                }
+            }
+        }
+        
     }
 //    for (int h=0; h< f_width ; h++){
 //        delete[]imSeq[h];
