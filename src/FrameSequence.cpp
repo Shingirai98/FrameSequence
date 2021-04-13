@@ -90,21 +90,32 @@ void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::
         //outputFile.write((const char*)imageSequence[0], (f_height*f_width));
        // }
         //for (int c=0; c<imageSequence.size(); c++){
-        float m =0;
         //std::cout << imageSequence.size() << std::endl;
-        if (operation == "invert" || operation == "revinvert"){
+        if (operation == "invert" ){
             for (int d=0; d<f_height; d++){
                 for (int e=0; e<f_width; e++){
                         //bo[d+e] = frame.imageSequence[0][d][e];
                         //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
-                   // m = (float)imageSequence[k][d][e] ;
-                    //std::cout << "you here" << std::endl;
-                    if (operation == "revinvert")
-                    outputFile << (unsigned char) (255-((float)imageSequence[k][d][e]) );
+                        outputFile << (unsigned char) (255-((float)imageSequence[k][d][e]) );
                         //std::cout <<(unsigned char)imageSequence[0][d][e];
                 }
             }
         }
+        else if(operation == "revinvert"){
+            for (int d=0; d<f_height; d++){
+                for (int e=0; e<f_width; e++){
+                        //bo[d+e] = frame.imageSequence[0][d][e];
+                        //outputFile.write((const char*)imageSequence[c], (f_height*f_width);
+                        outputFile << (unsigned char) (255-((float)imageSequence[imageSequence.size()-k][d][e]) );
+                }
+            }
+        }
+        else if(operation == "reverse"){
+            for (int d=0; d<f_height; d++){
+                for (int e=0; e<f_width; e++){
+                                
+                        outputFile << (unsigned char) (((float)imageSequence[imageSequence.size()-k][d][e]) );
+                }
         else{
             for (int d=0; d<f_height; d++){
                 for (int e=0; e<f_width; e++){
@@ -118,9 +129,9 @@ void FrameSequence::setFrames(char * bufferedImage, std::string operation, std::
         }
         
     }
-//    for (int h=0; h< f_width ; h++){
-//        delete[]imSeq[h];
-//    }
+    for (int h=0; h< f_width ; h++){
+        delete[]imSeq[h];
+   }
    delete[]imSeq;
   
 }
