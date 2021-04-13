@@ -64,7 +64,7 @@ void FrameSequence::setFrames(char * bufferedImage){
     for (int k= 0; k<imageSequence.size(); k++){
     
         //std:: string fN = k;
-        
+        std::string path = "./img/";
         std::string value = std::to_string(k);
         if (k <10){
             value = "000" + value;
@@ -77,7 +77,7 @@ void FrameSequence::setFrames(char * bufferedImage){
         }
 
         std::string extension = ".pgm";
-        std::string fileN = value+extension;
+        std::string fileN = path+value+extension;
         std::ofstream outputFile(fileN, std::ios::binary);
 
         outputFile << "P5\n" << f_width << " " << f_height <<  "\n"<< 255 << std::endl;
